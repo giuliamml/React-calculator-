@@ -9,8 +9,6 @@ const Calculator = () => {
     secondNumber: 0,
   });
 
-  
-
   const calculate = (firstNumber, secondNumber, symbol) => {
     switch (action.symbol) {
       case "+":
@@ -41,21 +39,27 @@ const Calculator = () => {
           symbol,
         });
         break;
-      case "%":
-        setAction({
-          firstNumber: firstNumber % secondNumber,
-          secondNumber: 0,
-          symbol,
-        });
-        break;
+
       case "c":
         setAction({
-			firstNumber: 0,
-			secondNumber: 0,
-			symbol,
+          firstNumber: 0,
+          secondNumber: 0,
+          symbol: "",
         });
         break;
     }
+  };
+
+  const percentageCal = () => {
+    action.secondNumber
+      ? setAction({ ...action, secondNumber: action.secondNumber / 100 })
+      : setAction({ ...action, secondNumber: action.firstNumber / 100 });
+  };
+
+  const plusMinusCal = () => {
+    action.secondNumber
+      ? setAction({ ...action, secondNumber: action.secondNumber * -1 })
+      : setAction({ ...action, firstNumber: action.firstNumber * -1 });
   };
 
   const clickHandler = (event) => {
@@ -83,9 +87,12 @@ const Calculator = () => {
           symbol: value,
         });
       }
+    } else if (type === "percentage") {
+      percentageCal();
+    } else if (type === "plusMinus") {
+      plusMinusCal();
     }
   };
-
   return (
     <div className={"layout"}>
       <header className={"result"}>

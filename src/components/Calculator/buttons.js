@@ -5,11 +5,11 @@ export const buttons = [
 	},
 	{
 		label: "+/-",
-		type: "symbol",
+		type: "plusMinus",
 	},
 	{
 		label: "%",
-		type: "symbol",
+		type: "percentage",
 	},
 	{
 		label: "/",
